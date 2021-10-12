@@ -1,32 +1,35 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <!-- 全局配置国际化 -->
+  <a-config-provider :locale="locale">
+    <div id="app">
+      <!-- 一级路由 -->
+      <router-view />
+      <!-- /一级路由 -->
     </div>
-    <router-view/>
-  </div>
+  </a-config-provider>
+  <!-- /全局配置国际化 -->
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+// 引入国际化相关模块
+import zhCN from 'ant-design-vue/es/locale/zh_CN'
+// 引入和配置国际化时间相关模块
+import moment from 'moment'
+import 'moment/locale/zh-cn'
+moment.locale('zh-cn')
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+export default {
+  data () {
+    return {
+      locale: zhCN // 国际化所需要变量
     }
   }
+}
+</script>
+
+<style lang="scss" scoped>
+#app {
+  // 设置页面高度 100% 撑开屏幕
+  height: 100%;
 }
 </style>
